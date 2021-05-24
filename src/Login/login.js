@@ -20,6 +20,9 @@ class Login extends Component {
   }
 
   loginHandler() {
+    this.setState({
+      loading: true
+    });
     axios
       .post(
         `https://pollmonarchapi.herokuapp.com/api/v1/users/login`,
@@ -33,12 +36,22 @@ class Login extends Component {
         axios.defaults.headers.common["Authorization"] =
           "Bearer " + res.data.token;
         this.setState({
-          redirect: true
+          redirect: true,
+          loading: false
         });
       });
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div className="login">
+          <div className="login-container">
+            <div class="loader"></div>
+          </div>
+        </div>
+      );
+    }
     if (this.state.redirect) {
       return <Redirect to="/home" />;
     }
