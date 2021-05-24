@@ -129,7 +129,9 @@ class Card extends Component {
           >
             Delete
           </button>
-          <button>Filters</button>
+          <Link to={`/results/${this.props.poll._id}`}>
+            <button>Filters</button>
+          </Link>
         </div>
       </div>
     );
